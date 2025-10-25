@@ -14,7 +14,7 @@ import {
 } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { auth } from '../firebase';
-import { listOutline, gridOutline, cubeOutline, logOutOutline } from 'ionicons/icons';
+import { musicalNotesOutline, videocamOutline, bookOutline, logOutOutline } from 'ionicons/icons';
 
 const Menu: React.FC = () => {
   const history = useHistory();
@@ -29,9 +29,9 @@ const Menu: React.FC = () => {
   };
 
   const menuItems = [
-    { title: 'Page 1', path: '/app/page1', icon: listOutline },
-    { title: 'Page 2', path: '/app/page2', icon: gridOutline },
-    { title: 'Page 3', path: '/app/page3', icon: cubeOutline },
+    { title: 'Find films', path: '/app/page1', icon: videocamOutline },
+    { title: 'Find music', path: '/app/page2', icon: musicalNotesOutline },
+    { title: 'Find reading', path: '/app/page3', icon: bookOutline },
   ];
 
   return (

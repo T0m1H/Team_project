@@ -69,7 +69,7 @@ const Page1: React.FC = () => { //
           <IonButtons slot="start">
             <IonMenuButton /> {/* Säilytetty alkuperäisestä Page1:stä */}
           </IonButtons>
-          <IonTitle>Page 1</IonTitle> {/* Säilytetty alkuperäisestä Page1:stä */}
+          <IonTitle>Film Database</IonTitle> {/* Säilytetty alkuperäisestä Page1:stä */}
         </IonToolbar>
       </IonHeader>
       

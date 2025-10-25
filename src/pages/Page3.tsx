@@ -18,7 +18,7 @@ const Page3: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Page 3</IonTitle>
+          <IonTitle>Book Database</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -28,7 +28,7 @@ const Page3: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <div className="container" style={{ padding: '16px' }}>
-          Welcome to Page3!
+          Coming soon!
         </div>
       </IonContent>
     </IonPage>
