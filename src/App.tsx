@@ -12,6 +12,7 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Details from './pages/Details';
+import MusicDetails from './pages/MusicDetails';
 
 
 import Signup from './pages/Signup';
@@ -43,6 +44,8 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+
+
 
 setupIonicReact();
 
@@ -84,6 +87,7 @@ const LoggedInRoutes: React.FC = () => (
         <Route path="/app/page3" component={Page3} exact />
         
         <Route path="/movies/:id" component={Details} exact />
+        <Route path="/artists/:id" component={MusicDetails} exact /> 
 
         <Redirect from="/" to="/app/page1" exact />
         
