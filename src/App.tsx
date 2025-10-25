@@ -11,6 +11,7 @@ import {
   IonSpinner,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import Details from './pages/Details';
 
 
 import Signup from './pages/Signup';
@@ -82,6 +83,8 @@ const LoggedInRoutes: React.FC = () => (
         <Route path="/app/page2" component={Page2} exact />
         <Route path="/app/page3" component={Page3} exact />
         
+        <Route path="/movies/:id" component={Details} exact />
+
         <Redirect from="/" to="/app/page1" exact />
         
         <Redirect from="/login" to="/app/page1" exact />
