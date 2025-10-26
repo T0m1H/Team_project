@@ -1,4 +1,3 @@
-// src/components/Menu.tsx
 import React from 'react';
 import {
   IonContent,

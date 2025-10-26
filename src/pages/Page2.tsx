@@ -15,8 +15,11 @@ import {
   IonAvatar,
   IonImg,
   IonButtons,
+  IonButton,
+  IonIcon,
   IonMenuButton
 } from '@ionic/react';
+import { homeOutline } from 'ionicons/icons';
 
 const Page2: React.FC = () => {
   const { searchData } = musicApi();
@@ -52,9 +55,14 @@ const Page2: React.FC = () => {
       <IonHeader>
         <IonToolbar color="primary">
           <IonButtons slot="start">
-            <IonMenuButton /> {/* Säilytetty alkuperäisestä Page1:stä */}
+            <IonMenuButton /> 
               </IonButtons>
-                <IonTitle>Music Database</IonTitle> {/* Säilytetty alkuperäisestä Page1:stä */}
+                <IonTitle>Music Database</IonTitle>
+                <IonButtons slot='end'>
+                  <IonButton routerLink='/app/welcome'>
+                    <IonIcon icon={homeOutline} />
+                  </IonButton>
+                </IonButtons>
               </IonToolbar>
             </IonHeader>
 

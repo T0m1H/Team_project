@@ -1,4 +1,3 @@
-// src/pages/Signup.tsx
 import React, { useRef, useState } from 'react';
 import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard,
@@ -9,11 +8,14 @@ import {
 import { auth } from '../firebase';
 import { useHistory } from 'react-router-dom';
 
+// Define the Signup component
 export default function Signup() {
+  // Create refs to get values from input fields directly
   const emailRef = useRef<HTMLIonInputElement>(null);
   const passwordRef = useRef<HTMLIonInputElement>(null);
   const passwordConfirmRef = useRef<HTMLIonInputElement>(null);
 
+  // Setup state for loading spinner, error messages, and navigation
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const history = useHistory();

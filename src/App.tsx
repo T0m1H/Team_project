@@ -1,4 +1,3 @@
-// src/App.tsx
 import { Redirect, Route, Switch } from 'react-router-dom';
 import {
   IonApp,
@@ -21,6 +20,7 @@ import Page1 from './pages/Page1';
 import Page2 from './pages/Page2';
 import Page3 from './pages/Page3';
 import Menu from './components/Menu';
+import LandingPage from './pages/LandingPage';
 import { useAuth } from './AuthContext';
 
 /* Core CSS...*/
@@ -82,6 +82,7 @@ const LoggedInRoutes: React.FC = () => (
     <Menu /> 
     <IonRouterOutlet id="main">
       <Switch>
+        <Route path="/app/welcome" component={LandingPage} exact />
         <Route path="/app/page1" component={Page1} exact />
         <Route path="/app/page2" component={Page2} exact />
         <Route path="/app/page3" component={Page3} exact />
@@ -89,10 +90,9 @@ const LoggedInRoutes: React.FC = () => (
         <Route path="/movies/:id" component={Details} exact />
         <Route path="/artists/:id" component={MusicDetails} exact /> 
 
-        <Redirect from="/" to="/app/page1" exact />
-        
-        <Redirect from="/login" to="/app/page1" exact />
-        <Redirect from="/signup" to="/app/page1" exact />
+        <Redirect from="/" to="/app/welcome" exact />
+        <Redirect from="/login" to="/app/welcome" exact />
+        <Redirect from="/signup" to="/app/welcome" exact />
       </Switch>
     </IonRouterOutlet>
   </IonSplitPane>

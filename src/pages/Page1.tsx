@@ -16,26 +16,27 @@ import {
   IonIcon,
   useIonAlert,
   useIonLoading,
-  IonImg
+  IonImg,
+  IonButton
 } from '@ionic/react';
-import React, { useEffect, useState } from 'react'; //
-import { SearchResult, SearchType, useApi } from '../hooks/useApi'; //
-import { gameControllerOutline, videocamOutline, tvOutline } from 'ionicons/icons'; //
+import React, { useEffect, useState } from 'react';
+import { SearchResult, SearchType, useApi } from '../hooks/useApi';
+import { gameControllerOutline, videocamOutline, tvOutline, homeOutline } from 'ionicons/icons';
 
-// Varmista, että olet luonut tämän tiedoston (perustuen movieApp/src/pages/Home.css)
+
 import './Page1.css'; //
 
-const Page1: React.FC = () => { //
-  // --- Kaikki logiikka on siirretty komponentin sisäpuolelle ---
+const Page1: React.FC = () => { 
 
-  const { searchData } = useApi(); //
-  const [searchTerm, setSearchTerm] = useState(''); //
-  const [type, setType] = useState<SearchType>(SearchType.all); //
-  const [results, setResults] = useState<SearchResult[]>([]); //
-  const [presentAlert] = useIonAlert(); //
-  const [loading, dismiss] = useIonLoading(); //
+  const { searchData } = useApi(); // Get the search function from our custom API hook
+  // Setup component state for search term, type, results, and UI feedback
+  const [searchTerm, setSearchTerm] = useState(''); 
+  const [type, setType] = useState<SearchType>(SearchType.all);
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const [presentAlert] = useIonAlert();
+  const [loading, dismiss] = useIonLoading();
 
-  useEffect(() => { //
+  useEffect(() => {
     if (searchTerm === '') {
       setResults([]);
       return;
@@ -44,46 +45,52 @@ const Page1: React.FC = () => { //
     const loadData = async () => {
       await loading();
       
-      // Korjattu "any" tyyppi: TypeScript päättelee tyypin nyt itse
-      const result = await searchData(searchTerm, type); //
-      console.log('X ~ file: Page1.tsx ~ loadData ~ result', result); //
+      
+      const result = await searchData(searchTerm, type);
+      console.log('X ~ file: Page1.tsx ~ loadData ~ result', result);
       await dismiss();
 
-      // Tyypiturvallinen tarkistus virheelle (olettaen, että useApi on korjattu)
-      if ('Error' in result) { //
-        presentAlert(result.Error); //
-        setResults([]); //
+      // Handle API errors by showing an alert
+      if ('Error' in result) {
+        presentAlert(result.Error);
+        setResults([]);
       } else {
-        setResults(result.Search); //
+        setResults(result.Search);
       }
     };
       
     loadData();
-  }, [searchTerm, type, searchData, loading, dismiss, presentAlert]); //
-  // --- Logiikka päättyy tähän ---
+  }, [searchTerm, type, searchData, loading, dismiss, presentAlert]);
+  
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar color="primary">
           <IonButtons slot="start">
-            <IonMenuButton /> {/* Säilytetty alkuperäisestä Page1:stä */}
+            <IonMenuButton /> 
           </IonButtons>
-          <IonTitle>Film Database</IonTitle> {/* Säilytetty alkuperäisestä Page1:stä */}
+          <IonTitle>Film Database</IonTitle>
+
+          <IonButtons slot='end'>
+            <IonButton routerLink='/app/welcome'>
+              <IonIcon icon={homeOutline} />
+            </IonButton>
+            </IonButtons> 
         </IonToolbar>
       </IonHeader>
       
-      <IonContent fullscreen> {/* */}
+      <IonContent fullscreen>
         
-        {/* --- Sisältö kopioitu Home.tsx:stä --- */}
+        
         
         <IonSearchbar
           value={searchTerm}
           debounce={300} 
           onIonChange={(e) => setSearchTerm(e.detail.value!)}> 
-        </IonSearchbar> {/* */}
+        </IonSearchbar> {}
 
-        <IonItem> {/* */}
+        <IonItem> {}
           <IonLabel>Select Searchtype</IonLabel>
           <IonSelect value={type} onIonChange={(e) => setType(e.detail.value!)}>
             <IonSelectOption value="">All</IonSelectOption>
@@ -91,19 +98,19 @@ const Page1: React.FC = () => { //
             <IonSelectOption value="series">Series</IonSelectOption>
             <IonSelectOption value="episode">Episode</IonSelectOption>
           </IonSelect>
-        </IonItem> {/* */}
+        </IonItem> {}
 
-        <IonList> {/* */}
-          {results.map((item: SearchResult) => ( //
-            <IonItem button key={item.imdbID} routerLink={`/movies/${item.imdbID}`}> {/* */}
+        <IonList> {}
+          {results.map((item: SearchResult) => (
+            <IonItem button key={item.imdbID} routerLink={`/movies/${item.imdbID}`}>
               <IonAvatar slot='start'>
-                <IonImg src={item.Poster} /> {/* */}
+                <IonImg src={item.Poster} /> {}
               </IonAvatar>
-              <IonLabel className='ion-text-wrap'>{item.Title}</IonLabel> {/* */}
+              <IonLabel className='ion-text-wrap'>{item.Title}</IonLabel>
 
-              {item.Type === 'movie' && ( <IonIcon slot='end' icon={videocamOutline} />)} {/* */}
-              {item.Type === 'series' && ( <IonIcon slot='end' icon={tvOutline} />)} {/* */}
-              {item.Type === 'game' && ( <IonIcon slot='end' icon={gameControllerOutline} />)} {/* */}
+              {item.Type === 'movie' && ( <IonIcon slot='end' icon={videocamOutline} />)}
+              {item.Type === 'series' && ( <IonIcon slot='end' icon={tvOutline} />)}
+              {item.Type === 'game' && ( <IonIcon slot='end' icon={gameControllerOutline} />)}
             </IonItem>
           ))}
         </IonList>

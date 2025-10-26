@@ -3,8 +3,11 @@ import React, { useState } from 'react';
 import { DetailsResult } from '../hooks/useApi';
 import { bodyOutline, clipboardOutline, starHalfOutline, trophyOutline } from 'ionicons/icons';
 import { useApi } from '../hooks/useApi';
+import { RouteComponentProps } from 'react-router-dom';
 
-
+type DetailsPageProps = RouteComponentProps<{
+  id: string;
+}>;
 
 
 const Details: React.FC<DetailsPageProps> = ({ match }) => {

@@ -1,4 +1,3 @@
-// src/pages/Page3.tsx
 import {
   IonButtons,
   IonContent,
@@ -7,8 +6,11 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  IonButton,
+  IonIcon
 } from '@ionic/react';
 import React from 'react';
+import { homeOutline } from 'ionicons/icons';
 
 const Page3: React.FC = () => {
   return (
@@ -19,6 +21,11 @@ const Page3: React.FC = () => {
             <IonMenuButton />
           </IonButtons>
           <IonTitle>Book Database</IonTitle>
+          <IonButtons slot='end'>
+            <IonButton routerLink='/app/welcome'>
+              <IonIcon icon={homeOutline} />
+            </IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

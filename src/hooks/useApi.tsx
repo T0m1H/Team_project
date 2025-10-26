@@ -1,4 +1,3 @@
-// useApi.tsx
 import { useCallback } from 'react';
 
 // Typescript custom enum for search types (optional)
@@ -42,7 +41,6 @@ export const useApi = () => {
   // You can get a free API key from http://www.omdbapi.com/apikey.aspx
 
   // Function to search for movies, series, or episodes by title and type
-  // KÄÄRITTY useCallback-HOOKIIN
   const searchData = useCallback(async (
     title: string,
     type: SearchType
@@ -52,14 +50,13 @@ export const useApi = () => {
     );
 
       return result.json();
-  }, [apiKey, url]); // <-- Lisää riippuvuudet (apiKey ja url)
+  }, [apiKey, url]);
 
   // Function to get detailed information about a specific movie, series, or episode by IMDb ID
-  // KÄÄRITTY useCallback-HOOKIIN eslint-disable-next-line no-irregular-whitespace
   const getDetails = useCallback(async (id: string): Promise<DetailsResult> => {
     const result = await fetch(`${url}?i=${id}&plot=full&apikey=${apiKey}`);
     return result.json();
-  }, [apiKey, url]); // <-- Lisää riippuvuudet (apiKey ja url)
+  }, [apiKey, url]);
 
 // Return the functions to be used in components
   return {

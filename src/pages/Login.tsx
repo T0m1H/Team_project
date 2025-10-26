@@ -1,4 +1,3 @@
-// src/pages/Login.tsx
 import React, { useRef, useState } from 'react';
 import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard,
@@ -6,9 +5,12 @@ import {
   IonInput, IonButton, IonGrid, IonRow, IonCol, IonLoading,
   IonToast, IonRouterLink
 } from '@ionic/react';
+// Import the Firebase auth service
 import { auth } from '../firebase';
+// Import useHistory for programmatic navigation (redirecting)
 import { useHistory } from 'react-router-dom';
 
+// Define the Login component
 export default function Login() {
   const emailRef = useRef<HTMLIonInputElement>(null);
   const passwordRef = useRef<HTMLIonInputElement>(null);
@@ -17,18 +19,22 @@ export default function Login() {
   const [error, setError] = useState<string | null>(null);
   const history = useHistory();
 
+  // This function runs when the user submits the form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
+    // Get the values from the input fields using the refs
     const email = emailRef.current?.value as string;
     const password = passwordRef.current?.value as string;
 
     try {
       setLoading(true);
       
+      // Call Firebase auth to sign in the user
       await auth.signInWithEmailAndPassword(email, password);
-      
+
+      // If login is successful, redirect to the main app page
       history.push('/');
     } catch (error: unknown) {
       console.error('Login failed:', error);
