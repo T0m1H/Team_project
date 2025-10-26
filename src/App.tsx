@@ -12,6 +12,7 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import Details from './pages/Details';
 import MusicDetails from './pages/MusicDetails';
+import BookDetails from './pages/BookDetails';
 
 
 import Signup from './pages/Signup';
@@ -89,6 +90,7 @@ const LoggedInRoutes: React.FC = () => (
         
         <Route path="/movies/:id" component={Details} exact />
         <Route path="/artists/:id" component={MusicDetails} exact /> 
+        <Route path="/books/:id" component={BookDetails} exact /> 
 
         <Redirect from="/" to="/app/welcome" exact />
         <Redirect from="/login" to="/app/welcome" exact />

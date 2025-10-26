@@ -6,13 +6,47 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonButton,
-  IonIcon
+  IonSearchbar,
+  IonList,
+  IonAvatar,
+  IonItem,
+  IonLabel,
+  useIonAlert,
+  useIonLoading,
+  IonImg
 } from '@ionic/react';
-import React from 'react';
-import { homeOutline } from 'ionicons/icons';
+import React, { useEffect, useState } from 'react';
 
 const Page3: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState<any[]>([]);
+  const [presentAlert] = useIonAlert();
+  const [loading, dismiss] = useIonLoading();
+
+  useEffect(() => {
+    if (searchTerm === '') {
+      setResults([]);
+      return;
+    }
+
+    const loadData = async () => {
+      await loading();
+
+      try {
+        const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`);
+        const data = await response.json();
+        setResults(data.items || []);
+      } catch (error) {
+        presentAlert('Virhe haettaessa kirjoja.');
+        setResults([]);
+      }
+
+      await dismiss();
+    };
+
+    loadData();
+  }, [searchTerm, loading, dismiss, presentAlert]);
+
   return (
     <IonPage>
       <IonHeader>
@@ -20,23 +54,33 @@ const Page3: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Book Database</IonTitle>
-          <IonButtons slot='end'>
-            <IonButton routerLink='/app/welcome'>
-              <IonIcon icon={homeOutline} />
-            </IonButton>
-          </IonButtons>
+          <IonTitle>Book Search</IonTitle>
         </IonToolbar>
       </IonHeader>
+
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Page 3</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <div className="container" style={{ padding: '16px' }}>
-          Coming soon!
-        </div>
+        <IonSearchbar
+          value={searchTerm}
+          debounce={300}
+          onIonChange={(e) => setSearchTerm(e.detail.value!)}
+        />
+
+        <IonList>
+          {results.map((item) => (
+            <IonItem
+              button
+              key={item.id}
+              routerLink={`/books/${item.id}`}
+            >
+              <IonAvatar slot="start">
+                <IonImg src={item.volumeInfo.imageLinks?.thumbnail || '/assets/book-placeholder.png'} />
+              </IonAvatar>
+              <IonLabel className="ion-text-wrap">
+                {item.volumeInfo.title}
+              </IonLabel>
+            </IonItem>
+          ))}
+        </IonList>
       </IonContent>
     </IonPage>
   );
