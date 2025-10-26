@@ -54,7 +54,7 @@ const Page3: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Book Search</IonTitle>
+          <IonTitle>Book Database</IonTitle>
         </IonToolbar>
       </IonHeader>
 
