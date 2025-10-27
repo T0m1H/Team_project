@@ -79,12 +79,12 @@ export default function Login() {
                 <IonCardContent>
                   <form onSubmit={handleSubmit}>
                     <IonItem>
-                      <IonLabel position='floating'>Email</IonLabel>
+                      <IonLabel position='stacked'>Email</IonLabel>
                       <IonInput type='email' ref={emailRef} required />
                     </IonItem>
 
                     <IonItem>
-                      <IonLabel position='floating'>Password</IonLabel>
+                      <IonLabel position='stacked'>Password</IonLabel>
                       <IonInput type='password' ref={passwordRef} required />
                     </IonItem>
 

@@ -1,5 +1,7 @@
 import {
   IonButtons,
+  IonButton,
+  IonIcon,
   IonContent,
   IonHeader,
   IonMenuButton,
@@ -16,6 +18,7 @@ import {
   IonImg
 } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
+import { homeOutline } from 'ionicons/icons';
 
 const Page3: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -55,6 +58,11 @@ const Page3: React.FC = () => {
             <IonMenuButton />
           </IonButtons>
           <IonTitle>Book Database</IonTitle>
+            <IonButtons slot='end'>
+              <IonButton routerLink='/app/welcome'>
+                <IonIcon icon={homeOutline} />
+              </IonButton>
+            </IonButtons>
         </IonToolbar>
       </IonHeader>
 

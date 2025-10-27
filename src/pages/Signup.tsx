@@ -83,17 +83,17 @@ export default function Signup() {
                 <IonCardContent>
                   <form onSubmit={handleSubmit}>
                     <IonItem className='ion-margin-bottom'>
-                      <IonLabel position='floating'>Email</IonLabel>
+                      <IonLabel position='stacked'>Email</IonLabel>
                       <IonInput type="email" ref={emailRef} required />
                     </IonItem>
 
                     <IonItem className='ion-margin-bottom'>
-                      <IonLabel position='floating'>Password</IonLabel>
+                      <IonLabel position='stacked'>Password</IonLabel>
                       <IonInput type='password' ref={passwordRef} required />
                     </IonItem>
 
                     <IonItem className='ion-margin-bottom'>
-                      <IonLabel position='floating'>Password Confirmation</IonLabel>
+                      <IonLabel position='stacked'>Password Confirmation</IonLabel>
                       <IonInput type='password' ref={passwordConfirmRef} required />
                     </IonItem>
 
